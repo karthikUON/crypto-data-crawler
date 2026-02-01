@@ -2,9 +2,8 @@
 
 import logging
 
-from sqlalchemy import create_engine, event
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import NullPool
 
 from crawler.config import settings
 from db.models import Base

@@ -62,12 +62,7 @@ async def get_prices(
 
         # Apply pagination and ordering
         offset = (page - 1) * per_page
-        prices = (
-            query.order_by(desc(CryptoPrice.last_updated))
-            .limit(per_page)
-            .offset(offset)
-            .all()
-        )
+        prices = query.order_by(desc(CryptoPrice.last_updated)).limit(per_page).offset(offset).all()
 
         # Convert to response models
         price_responses = [CryptoPriceResponse.model_validate(price) for price in prices]
@@ -81,9 +76,7 @@ async def get_prices(
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
-@router.get(
-    "/api/v1/prices/{symbol}", response_model=CryptoPriceResponse, tags=["Cryptocurrency"]
-)
+@router.get("/api/v1/prices/{symbol}", response_model=CryptoPriceResponse, tags=["Cryptocurrency"])
 async def get_price_by_symbol(symbol: str, db: Session = Depends(get_db)):
     """
     Get the latest price for a specific cryptocurrency.

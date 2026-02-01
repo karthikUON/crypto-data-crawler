@@ -176,7 +176,5 @@ class TestCryptoPriceModel:
         db_session.commit()
 
         # Query all BTC prices
-        btc_prices = (
-            db_session.query(CryptoPrice).filter(CryptoPrice.symbol == "BTC").all()
-        )
+        btc_prices = db_session.query(CryptoPrice).filter(CryptoPrice.symbol == "BTC").all()
         assert len(btc_prices) == 2
